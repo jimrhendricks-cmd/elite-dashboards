@@ -845,7 +845,7 @@ function buildAnnual(){
       qGoals:[65125,65125,65125,65125]}
   };
 
-  var q1=fy.slice(0,3),q2=fy.slice(3,6),q3=fy.slice(6,9),q4=fy.slice(9);
+  var q1=fy.slice(0,2),q2=fy.slice(2,5),q3=fy.slice(5,8),q4=fy.slice(8);
   function qSum(arr,k){return arr.reduce(function(s,m){return s+m[k];},0);}
   var ytdDues=qSum(fy,'dues'),ytdPT=qSum(fy,'ptRev'),ytdMem=qSum(fy,'mem'),ytdTotal=ytdDues+ytdPT;
   var ytdDuesG=qSum(fy,'duesG'),ytdMemG=qSum(fy,'memG');
@@ -1111,7 +1111,7 @@ function buildAnnual(){
 
   h+='<div class="card" style="margin-bottom:14px;"><div class="card-hd"><span class="card-title">Quarterly Performance to Plan</span><span style="font-size:9px;color:var(--text3);margin-left:8px;">Click to drill down</span></div>';
   h+='<div style="padding:14px;">';
-  var quarters=[{name:'Q1',sub:'Apr — Jun',data:q1,color:'var(--green)'},{name:'Q2',sub:'Jul — Sep',data:q2,color:'var(--blue)'},{name:'Q3',sub:'Oct — Dec',data:q3,color:'var(--purple)'},{name:'Q4',sub:'Jan — Mar',data:q4,color:'var(--gold)'}];
+  var quarters=[{name:'Q2 \'25',sub:'Apr — Jun',data:q1,color:'var(--green)'},{name:'Q3 \'25',sub:'Jul — Sep',data:q2,color:'var(--blue)'},{name:'Q4 \'25',sub:'Oct — Dec',data:q3,color:'var(--purple)'},{name:'Q1 \'26',sub:'Jan — Mar',data:q4,color:'var(--gold)'}];
   quarters.forEach(function(q,qi){
     var qPT=qSum(q.data,'ptRev'),qDues=qSum(q.data,'dues'),qDuesG=qSum(q.data,'duesG');
     var qMem=qSum(q.data,'mem'),qMemG=qSum(q.data,'memG');
