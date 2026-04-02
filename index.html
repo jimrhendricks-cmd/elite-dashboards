@@ -1365,6 +1365,53 @@ function buildAnnual(){
   h+='<div class="mono" style="font-size:20px;font-weight:700;color:var(--gold);">$'+Math.round(ytdPT).toLocaleString()+'</div>';
   var ptG=parseFloat(ptYoYPct);h+='<div class="mono" style="font-size:10px;color:'+(ptG>=0?'var(--green)':'var(--red)')+';margin-top:4px;font-weight:600;">'+(ptG>=0?'▲ +':'▼ ')+ptYoYPct+'% YoY</div>';
   h+='</div></div>';
+
+  // ===== LOCATION-LEVEL YOY BREAKDOWN =====
+  h+='<div style="margin-top:20px;"><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:12px;padding-left:2px;">PT Revenue by Division · March YoY</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">';
+  var locYoY=[
+    {name:'Southglenn',color:'var(--green)',bg:'rgba(52,211,153,0.06)',bdr:'rgba(52,211,153,0.2)',py:127900,cy:127762,trainers:'13 trainers'},
+    {name:'Inverness',color:'var(--steel)',bg:'rgba(59,80,104,0.08)',bdr:'rgba(59,80,104,0.25)',py:58700,cy:69532,trainers:'7 trainers'},
+    {name:'Lowry + Skills',color:'var(--gold)',bg:'rgba(201,168,76,0.06)',bdr:'rgba(201,168,76,0.2)',py:17800,cy:27673,trainers:'6 trainers'}
+  ];
+  locYoY.forEach(function(loc){
+    var delta=loc.cy-loc.py;var pct=((loc.cy/loc.py-1)*100).toFixed(1);var isUp=delta>=0;
+    var barMax=Math.max(loc.py,loc.cy);
+    h+='<div style="background:'+loc.bg+';border:1px solid '+loc.bdr+';border-radius:10px;padding:16px;position:relative;overflow:hidden;">';
+    h+='<div style="position:absolute;top:0;left:0;right:0;height:2px;background:'+loc.color+';opacity:0.5;"></div>';
+    // Header
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">';
+    h+='<div style="font-size:11px;font-weight:700;color:'+loc.color+';">'+loc.name.toUpperCase()+'</div>';
+    h+='<span class="mono" style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;color:'+(isUp?'var(--green)':'var(--red)')+';background:'+(isUp?'rgba(52,211,153,0.15)':'rgba(239,68,68,0.15)')+';">'+(isUp?'▲ +':'▼ ')+pct+'%</span>';
+    h+='</div>';
+    // Current year bar
+    h+='<div style="margin-bottom:6px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">';
+    h+='<span style="font-size:8px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;font-weight:600;">Mar 2026</span>';
+    h+='<span class="mono" style="font-size:12px;font-weight:700;color:var(--text);">$'+Math.round(loc.cy).toLocaleString()+'</span></div>';
+    h+='<div style="height:8px;background:var(--surface3);border-radius:4px;overflow:hidden;"><div style="height:100%;width:'+(loc.cy/barMax*100).toFixed(0)+'%;background:'+loc.color+';border-radius:4px;"></div></div></div>';
+    // Prior year bar
+    h+='<div style="margin-bottom:8px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">';
+    h+='<span style="font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;font-weight:600;">Mar 2025</span>';
+    h+='<span class="mono" style="font-size:11px;font-weight:600;color:var(--text3);">$'+Math.round(loc.py).toLocaleString()+'</span></div>';
+    h+='<div style="height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;"><div style="height:100%;width:'+(loc.py/barMax*100).toFixed(0)+'%;background:rgba(94,109,130,0.4);border-radius:3px;"></div></div></div>';
+    // Delta
+    h+='<div style="border-top:1px solid var(--border);padding-top:8px;display:flex;justify-content:space-between;align-items:center;">';
+    h+='<span style="font-size:8px;color:var(--text3);">'+loc.trainers+'</span>';
+    h+='<span class="mono" style="font-size:11px;font-weight:600;color:'+(isUp?'var(--green)':'var(--red)')+';">'+(isUp?'+':'')+'$'+Math.round(Math.abs(delta)).toLocaleString()+'</span>';
+    h+='</div></div>';
+  });
+  h+='</div>';
+  // Company sales row
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;">';
+  h+='<div><span style="font-size:10px;font-weight:600;color:var(--text2);">Company Contracts & Owner Sales</span><span style="font-size:9px;color:var(--text3);margin-left:8px;">Hendricks + Vinson + Leads</span></div>';
+  h+='<div style="display:flex;align-items:center;gap:12px;">';
+  h+='<span class="mono" style="font-size:10px;color:var(--text3);">$9,152</span>';
+  h+='<span style="font-size:10px;color:var(--text3);">→</span>';
+  h+='<span class="mono" style="font-size:11px;font-weight:600;color:var(--text);">$10,576</span>';
+  h+='<span class="mono" style="font-size:9px;font-weight:600;color:var(--green);background:rgba(52,211,153,0.1);border-radius:8px;padding:2px 6px;">▲ +15.6%</span>';
+  h+='</div></div></div>';
   h+='</div></div>';
 
   // ===== CHARTS =====
