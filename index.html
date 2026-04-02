@@ -727,9 +727,9 @@ function buildProcess(){
   el.innerHTML=h;
 
   // Regional sub-tabs
-  buildPMRegion('pm-sg','SOUTHGLENN',{sessions:312,assessments:18,pafo:22,sold:12,outreach:589,retention:'82%',newClients:45,avgTicket:'$977',utilization:'74%'});
-  buildPMRegion('pm-inv','INVERNESS',{sessions:198,assessments:15,pafo:14,sold:6,outreach:478,retention:'78%',newClients:32,avgTicket:'$845',utilization:'68%'});
-  buildPMRegion('pm-low','LOWRY',{sessions:142,assessments:11,pafo:11,sold:4,outreach:552,retention:'71%',newClients:28,avgTicket:'$712',utilization:'62%'});
+  buildPMRegion('pm-sg','SOUTHGLENN',{sessions:312,assessments:18,pafo:22,sold:12,outreach:589,retention:'82%',newClients:45,avgTicket:'$977',utilization:'74%',cancels:48,netMembers:'+17'});
+  buildPMRegion('pm-inv','INVERNESS',{sessions:198,assessments:15,pafo:14,sold:6,outreach:478,retention:'78%',newClients:32,avgTicket:'$845',utilization:'68%',cancels:52,netMembers:'+13'});
+  buildPMRegion('pm-low','LOWRY',{sessions:142,assessments:11,pafo:11,sold:4,outreach:552,retention:'71%',newClients:28,avgTicket:'$712',utilization:'62%',cancels:37,netMembers:'+3'});
 
   // Membership sub-tab
   buildPMMem();
@@ -741,7 +741,7 @@ function buildPMRegion(id,name,d){
   var el=document.getElementById(id);
   var h='<div class="card"><div class="card-hd"><span class="card-title">'+name+' — Process Measures</span></div>';
   h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;padding:14px;">';
-  [{v:d.sessions,l:'SESSIONS DELIVERED',c:'var(--blue)'},{v:d.assessments,l:'PA/FO ASSESSMENTS',c:'var(--purple)'},{v:d.pafo,l:'PA/FO BOOKED',c:'var(--gold)'},{v:d.sold,l:'PA/FO SOLD',c:'var(--green)'},{v:d.outreach,l:'OUTREACH TOUCHES',c:'var(--blue)'},{v:d.retention,l:'CLIENT RETENTION',c:'var(--green)'},{v:d.newClients,l:'NEW CLIENTS',c:'var(--gold)'},{v:d.avgTicket,l:'AVG TICKET',c:'var(--gold)'},{v:d.utilization,l:'TRAINER UTILIZATION',c:'var(--purple)'}].forEach(function(m){
+  [{v:d.sessions,l:'SESSIONS DELIVERED',c:'var(--blue)'},{v:d.assessments,l:'PA/FO ASSESSMENTS',c:'var(--purple)'},{v:d.pafo,l:'PA/FO BOOKED',c:'var(--gold)'},{v:d.sold,l:'PA/FO SOLD',c:'var(--green)'},{v:d.outreach,l:'OUTREACH TOUCHES',c:'var(--blue)'},{v:d.retention,l:'CLIENT RETENTION',c:'var(--green)'},{v:d.newClients,l:'NEW CLIENTS',c:'var(--gold)'},{v:d.cancels||'—',l:'CANCELLATIONS',c:'var(--red)'},{v:d.netMembers||'—',l:'NET MEMBERS',c:'var(--green)'},{v:d.avgTicket,l:'AVG TICKET',c:'var(--gold)'},{v:d.utilization,l:'TRAINER UTILIZATION',c:'var(--purple)'}].forEach(function(m){
     h+='<div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px;text-align:center;"><div class="mono" style="font-size:16px;font-weight:700;color:'+m.c+'">'+m.v+'</div><div style="font-size:7px;color:var(--text3);text-transform:uppercase;letter-spacing:0.8px;margin-top:1px;">'+m.l+'</div></div>';
   });
   h+='</div></div>';
@@ -752,7 +752,7 @@ function buildPMMem(){
   var el=document.getElementById('pm-mem');
   var h='<div class="card"><div class="card-hd"><span class="card-title">Membership — Lag Measures</span></div>';
   h+='<div style="padding:14px;"><table class="t"><thead><tr><th>Measure</th><th class="r">Goal</th><th class="r">Actual</th><th class="r">+/-</th></tr></thead><tbody>';
-  [['Dues & Fees','$165,374','$164,109','-$1,265','c-red'],['New Members','149','170','+21','c-green'],['Cancellations','135','137','+2','c-red'],['Avg Dues','$63.78','$62.83','-$0.95','c-red'],['MOM Growth','—','+$3,936','+$3,936','c-green'],['Retail Revenue','$3,500','$3,790','+$290','c-green']].forEach(function(r){
+  [['Dues & Fees','$165,374','$164,109','-$1,265','c-red'],['New Members','149','170','+21','c-green'],['Cancellations','135','137','+2','c-red'],['Net Members','14','33','+19','c-green'],['Avg Dues','$63.78','$62.83','-$0.95','c-red'],['MOM Growth','—','+$3,936','+$3,936','c-green'],['Retail Revenue','$3,500','$3,790','+$290','c-green']].forEach(function(r){
     h+='<tr class="tr"><td class="nm">'+r[0]+'</td><td class="r c-dim">'+r[1]+'</td><td class="r rv2 c-gold">'+r[2]+'</td><td class="r '+r[4]+'">'+r[3]+'</td></tr>';
   });
   h+='</tbody></table></div></div>';
