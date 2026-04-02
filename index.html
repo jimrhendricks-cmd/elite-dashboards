@@ -204,7 +204,6 @@ table.ctbl td{padding:5px 10px;font-size:12px;border-bottom:1px solid rgba(255,2
     <p>Master Dashboard &mdash; March 2026 Final</p>
   </div>
   <div class="header-right">
-    <a href="leading.html" style="display:inline-block;background:linear-gradient(135deg,#A78BFA,#60A5FA);color:#fff;text-decoration:none;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;letter-spacing:1px;margin-right:8px;">LEADING MEASURES →</a>
     <span class="tag tag-green" style="font-size:13px;padding:5px 14px;">RECORD MONTH</span>
   </div>
 </div>
@@ -304,6 +303,54 @@ function buildScoreboard(){
   h+='<div class="card-header"><span class="card-title">Region Performance</span></div>';
   h+='<div class="card-body">';
 
+  // MEMBERSHIP REGION — Visual Scorecard (no trainer drill-down)
+  h+='<div class="region-block">';
+  h+='<div class="region-head" style="cursor:default;background:linear-gradient(135deg,rgba(52,211,153,.04),transparent)">';
+  h+='<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span class="region-title" style="color:var(--green)">MEMBERSHIP</span>';
+  h+='<span class="tag tag-gold">99.2% to Target</span>';
+  h+='</div>';
+  h+='<div class="region-meta">';
+  h+='<div class="rm-item"><div class="rm-val c-green">$164,109</div><div class="rm-label">Dues & Fees</div></div>';
+  h+='<div class="rm-item"><div class="rm-val c-dim">$165,374</div><div class="rm-label">Target</div></div>';
+  h+='<div class="rm-item"><div class="rm-val c-gold">99.2%</div><div class="rm-label">Achievement</div></div>';
+  h+='<div class="rm-item"><div class="rm-val">2,612</div><div class="rm-label">Members</div></div>';
+  h+='<div class="rm-item"><div class="rm-val c-green">170</div><div class="rm-label">New (MTD)</div></div>';
+  h+='</div></div>';
+  h+='<div class="progress-slim"><div class="progress-fill" style="width:99.2%;background:var(--gold);border-radius:2px;"></div></div>';
+
+  h+='<div style="padding:12px 20px;">';
+  h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:12px;">';
+  // Scorecard metrics
+  var memCards=[
+    {v:'$164,109',l:'Dues & Fees',c:'var(--gold)'},
+    {v:'170',l:'New Members (vs 149)',c:'var(--green)'},
+    {v:'2,612',l:'Total Members',c:'var(--blue)'},
+    {v:'$62.83',l:'Avg Dues',c:'var(--text)'},
+    {v:'-137',l:'Cancellations (vs 135)',c:'var(--red)'},
+    {v:'+$3,936',l:'MOM Growth',c:'var(--green)'},
+    {v:'60.4%',l:'Tour Close Rate',c:'var(--green)'},
+    {v:'39.1%',l:'Overall Close Rate',c:'var(--gold)'}
+  ];
+  memCards.forEach(function(mc){
+    h+='<div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;">';
+    h+='<div style="font-family:IBM Plex Mono,monospace;font-size:16px;font-weight:700;color:'+mc.c+';">'+mc.v+'</div>';
+    h+='<div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">'+mc.l+'</div>';
+    h+='</div>';
+  });
+  h+='</div>';
+
+  // Lag vs Leading mini table
+  h+='<table class="tbl" style="font-size:12px;"><thead><tr><th>Measure</th><th class="r">Target</th><th class="r">Actual</th><th class="r">Status</th></tr></thead><tbody>';
+  h+='<tr><td>Membership Dues</td><td class="r" style="color:var(--text3)">$165,374</td><td class="r" style="color:var(--gold);font-weight:700">$164,109</td><td class="r" style="color:var(--gold)">99.2%</td></tr>';
+  h+='<tr><td>New Members</td><td class="r" style="color:var(--text3)">149</td><td class="r" style="color:var(--green);font-weight:700">170</td><td class="r" style="color:var(--green)">114%</td></tr>';
+  h+='<tr><td>Cancellations</td><td class="r" style="color:var(--text3)">135</td><td class="r" style="color:var(--red);font-weight:700">137</td><td class="r" style="color:var(--red)">Over +2</td></tr>';
+  h+='<tr><td>Guest Passes → Sold</td><td class="r" style="color:var(--text3)">—</td><td class="r" style="font-weight:700">241 → 24</td><td class="r" style="color:var(--gold)">10%</td></tr>';
+  h+='<tr><td>First Time Tours → Sold</td><td class="r" style="color:var(--text3)">—</td><td class="r" style="font-weight:700">48 → 29</td><td class="r" style="color:var(--green)">60.4%</td></tr>';
+  h+='<tr><td>ABC Leads → Sales</td><td class="r" style="color:var(--text3)">—</td><td class="r" style="font-weight:700">427 → 167</td><td class="r" style="color:var(--gold)">39.1%</td></tr>';
+  h+='</tbody></table>';
+  h+='<div style="margin-top:8px;font-size:11px;color:var(--text3);padding:4px 0;">Reger Craigo — Southglenn Primary &bull; Team Outreach: 1,619 touches &bull; <a href="leading.html" style="color:var(--gold);text-decoration:none;font-weight:600;">View Full Leading Measures →</a></div>';
+  h+='</div></div>';
+
   D.regions.forEach((reg,ri)=>{
     const rP=parseFloat(pctF(reg.revenue,reg.goal));
     const ou=reg.revenue-reg.goal;
@@ -401,7 +448,37 @@ function buildScoreboard(){
   h+='<div class="b-label">Company &amp; Leadership + iTrade</div><div class="b-val">'+fmtD(D.companyRev)+'</div>';
   h+='<div class="b-label">Audit Reclassifications</div><div class="b-val">'+fmtD(D.auditDelta)+'</div>';
   h+='<div class="b-label b-total">Verified Total</div><div class="b-val b-total">'+fmtD(D.jimsTotal)+'</div>';
+  h+='</div>';
+
+  // YOY COMPARISON BANNER
+  var yoyDelta=D.jimsTotal-D.kpis.yoyPrior;
+  var yoyPct=((D.jimsTotal/D.kpis.yoyPrior-1)*100).toFixed(1);
+  var yoyUp=yoyDelta>=0;
+  h+='<div style="margin-top:14px;background:linear-gradient(135deg,'+(yoyUp?'rgba(52,211,153,.06)':'rgba(248,113,113,.06)')+',transparent);border:1px solid '+(yoyUp?'rgba(52,211,153,.25)':'rgba(248,113,113,.25)')+';border-radius:10px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">';
+  h+='<div>';
+  h+='<div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:2px;font-weight:600;">Year Over Year — March</div>';
+  h+='<div style="font-size:13px;margin-top:4px;color:var(--text2);">Mar 2025: <span class="mono" style="font-weight:600;">'+fmtD(D.kpis.yoyPrior)+'</span> → Mar 2026: <span class="mono" style="font-weight:700;color:var(--gold);">'+fmtD(D.jimsTotal)+'</span></div>';
+  h+='</div>';
+  h+='<div style="text-align:right;">';
+  h+='<div style="font-family:IBM Plex Mono,monospace;font-size:22px;font-weight:700;color:'+(yoyUp?'var(--green)':'var(--red)')+';">'+(yoyUp?'+':'')+fmtD(yoyDelta)+'</div>';
+  h+='<div style="font-size:12px;font-weight:600;color:'+(yoyUp?'var(--green)':'var(--red)')+';">'+(yoyUp?'▲':'▼')+' '+yoyPct+'% YOY '+(yoyUp?'GROWTH':'DECLINE')+'</div>';
   h+='</div></div>';
+
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;">';
+  h+='<div style="background:linear-gradient(135deg,rgba(52,211,153,.08),transparent);border:1px solid rgba(52,211,153,.3);border-radius:10px;padding:14px;text-align:center;">';
+  h+='<div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">Membership Dues &amp; Fees</div>';
+  h+='<div style="font-family:IBM Plex Mono,monospace;font-size:24px;font-weight:700;color:#34D399;margin:4px 0;">$164,109</div>';
+  h+='<div style="font-size:10px;color:var(--text3);">Target: $165,374 &mdash; <span style="color:#C9A84C;font-weight:600;">99.2%</span></div>';
+  h+='<div style="font-size:10px;color:var(--text3);margin-top:4px;">170 New Members (Goal: 149) &bull; 2,612 Total</div>';
+  h+='</div>';
+  h+='<div style="background:linear-gradient(135deg,rgba(201,168,76,.08),transparent);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:14px;text-align:center;">';
+  h+='<div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">Training &amp; Services Revenue</div>';
+  h+='<div style="font-family:IBM Plex Mono,monospace;font-size:24px;font-weight:700;color:#C9A84C;margin:4px 0;">'+fmtD(D.jimsTotal)+'</div>';
+  h+='<div style="font-size:10px;color:var(--text3);">Goal: $225,000 &mdash; <span style="color:#34D399;font-weight:600;">104% \u2714</span></div>';
+  h+='<div style="font-size:10px;color:var(--text3);margin-top:4px;">Combined Revenue: $398,064</div>';
+  h+='</div>';
+  h+='</div>';
+  h+='</div>';
 
   el.innerHTML=h;
 }

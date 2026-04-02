@@ -31,9 +31,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .lead-lag-item .lbl{font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:1px}
 
 /* Tabs */
-.tabs{display:flex;gap:4px;margin-bottom:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs{display:flex;gap:3px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-wrap:wrap}
 .tabs::-webkit-scrollbar{display:none}
-.tab{padding:7px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:var(--font);font-size:11px;font-weight:600;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.tab{padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:var(--font);font-size:10px;font-weight:600;white-space:nowrap;flex-shrink:0;transition:all .2s}
 .tab.active{background:var(--gold);color:#000;border-color:var(--gold)}
 .tab-content{display:none}
 .tab-content.active{display:block}
@@ -178,18 +178,19 @@ tr.totals-row td{border-top:2px solid var(--gold)}
 
 <!-- Tabs -->
 <div class="tabs">
-<button class="tab active" onclick="showTab('all',event)">Company Overview</button>
+<button class="tab active" onclick="showTab('mem',event)">Membership</button>
+<button class="tab" onclick="showTab('all',event)">Company Overview</button>
 <button class="tab" onclick="showTab('sg',event)">Southglenn</button>
 <button class="tab" onclick="showTab('inv',event)">Inverness</button>
 <button class="tab" onclick="showTab('low',event)">Lowry</button>
-<button class="tab" onclick="showTab('mem',event)">Membership</button>
+<button class="tab" onclick="showTab('pathway',event)">Performance Pathway</button>
 <button class="tab" onclick="showTab('pafo',event)">PA/FO Tracker</button>
 <button class="tab" onclick="showTab('funnel',event)">Sales Funnel</button>
 <button class="tab" onclick="showTab('delta',event)">Self vs ABC Delta</button>
 </div>
 
 <!-- COMPANY OVERVIEW TAB -->
-<div id="all" class="tab-content active">
+<div id="all" class="tab-content">
 <div class="metric-grid">
 <div class="metric-card highlight gold"><div class="val">1,508</div><div class="lbl">TOTAL CONTACTS</div></div>
 <div class="metric-card green"><div class="val">117</div><div class="lbl">TOTAL LEADS</div></div>
@@ -197,7 +198,7 @@ tr.totals-row td{border-top:2px solid var(--gold)}
 <div class="metric-card purple"><div class="val">26</div><div class="lbl">ABC CONFIRMED PA/FO</div></div>
 <div class="metric-card orange"><div class="val">22</div><div class="lbl">CLOSED / SOLD</div></div>
 <div class="metric-card red"><div class="val">21</div><div class="lbl">DELTA (Self vs ABC)</div></div>
-<div class="metric-card highlight green"><div class="val">$60,232</div><div class="lbl">MEMBERSHIP (115% Goal)</div></div>
+<div class="metric-card highlight green"><div class="val">$164,109</div><div class="lbl">MEM DUES (99% Target)</div></div>
 </div>
 
 <div class="table-wrap">
@@ -232,7 +233,7 @@ tr.totals-row td{border-top:2px solid var(--gold)}
 <div class="metric-card purple"><div class="val">26</div><div class="lbl">ABC CONFIRMED</div></div>
 <div class="metric-card orange"><div class="val">10</div><div class="lbl">SOLD</div></div>
 <div class="metric-card green"><div class="val">48%</div><div class="lbl">PA → CLOSE RATE</div></div>
-<div class="metric-card highlight green"><div class="val">$60,232</div><div class="lbl">MEMBERSHIP REV (115%)</div></div>
+<div class="metric-card highlight green"><div class="val">$164,109</div><div class="lbl">MEM DUES (99% Tgt)</div></div>
 </div>
 
 <div style="font-size:11px;font-weight:600;color:var(--gold);margin:12px 0 6px;letter-spacing:1px">TRAINER CONTACT ACTIVITY</div>
@@ -387,6 +388,82 @@ tr.totals-row td{border-top:2px solid var(--gold)}
 </div>
 </div>
 
+<!-- PERFORMANCE PATHWAY DIRECTOR TAB -->
+<div id="pathway" class="tab-content">
+<div class="region-section">
+<div class="region-header">
+<div class="region-name">PERFORMANCE PATHWAY</div>
+<span class="region-badge" style="background:rgba(167,139,250,.15);color:var(--purple)">Erich Priest — Director</span>
+</div>
+
+<div style="background:linear-gradient(135deg,#1e1b4b,#0f172a);border:2px solid var(--purple);border-radius:10px;padding:14px;margin-bottom:14px;text-align:center">
+<div style="font-size:9px;letter-spacing:2px;color:var(--purple);margin-bottom:4px">NEW MEMBER → PA/FO CONVERSION</div>
+<div style="font-family:var(--mono);font-size:32px;font-weight:700;color:#fff">27.6%</div>
+<div style="font-size:10px;color:var(--muted);margin-top:2px">Target: 60% — <span class="red-text" style="font-weight:700">47 of 170 New Members → PA/FO</span></div>
+<div class="progress-bar" style="margin-top:8px;max-width:400px;margin-left:auto;margin-right:auto"><div class="fill" style="width:46%;background:var(--red)"></div></div>
+</div>
+
+<div class="metric-grid">
+<div class="metric-card highlight purple"><div class="val">170</div><div class="lbl">NEW MEMBERS (MTD)</div></div>
+<div class="metric-card blue"><div class="val">47</div><div class="lbl">PA/FO BOOKED</div></div>
+<div class="metric-card green"><div class="val">22</div><div class="lbl">SOLD (COMPANY)</div></div>
+<div class="metric-card gold"><div class="val">$752</div><div class="lbl">AVG 1ST SALE (SG)</div></div>
+<div class="metric-card orange"><div class="val">46.8%</div><div class="lbl">PA → CLOSE RATE</div></div>
+<div class="metric-card red"><div class="val">27.6%</div><div class="lbl">PATHWAY RATE (60% TGT)</div></div>
+</div>
+
+<div style="font-size:11px;font-weight:600;color:var(--purple);margin:12px 0 6px;letter-spacing:1px">PATHWAY PIPELINE — MARCH 2026</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>METRIC</th><th class="num">TARGET</th><th class="num">ACTUAL</th><th class="num">VARIANCE</th><th class="num">STATUS</th></tr></thead>
+<tbody>
+<tr><td class="bold">New Members</td><td class="num">149</td><td class="num green-text bold">170</td><td class="num green-text">+21</td><td class="num green-text bold">114%</td></tr>
+<tr><td class="bold">New Member → PA/FO</td><td class="num">60%</td><td class="num red-text bold">27.6%</td><td class="num red-text">-32.4pts</td><td class="num red-text">46%</td></tr>
+<tr><td class="bold">PA/FOs Booked (All)</td><td class="num">102</td><td class="num red-text bold">47</td><td class="num red-text">-55</td><td class="num red-text">46%</td></tr>
+<tr><td class="bold">PA/FOs in ABC System</td><td class="num">—</td><td class="num">26</td><td class="num red-text">-21 gap</td><td class="num red-text">55% logged</td></tr>
+<tr><td class="bold">Sold from PA/FO</td><td class="num">—</td><td class="num green-text bold">22</td><td class="num">—</td><td class="num gold-text">46.8%</td></tr>
+<tr><td class="bold">Avg 1st Sale (SG Tracked)</td><td class="num">—</td><td class="num gold-text bold">$752</td><td class="num">—</td><td class="num">10 tracked</td></tr>
+<tr><td class="bold">Est. New Training Rev</td><td class="num">—</td><td class="num gold-text bold">$7,525+</td><td class="num">—</td><td class="num">SG only</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="font-size:11px;font-weight:600;color:var(--purple);margin:12px 0 6px;letter-spacing:1px">PATHWAY BY REGION</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>REGION</th><th class="num">NEW MEM</th><th class="num">PA/FO</th><th class="num">RATE</th><th class="num">SOLD</th><th class="num">CLOSE %</th><th class="num">ABC LOGGED</th></tr></thead>
+<tbody>
+<tr><td class="bold">SOUTHGLENN</td><td class="num">—</td><td class="num">21</td><td class="num">—</td><td class="num green-text bold">10</td><td class="num gold-text">48%</td><td class="num green-text">26</td></tr>
+<tr><td class="bold">INVERNESS</td><td class="num">—</td><td class="num">7</td><td class="num">—</td><td class="num">6</td><td class="num gold-text">86%</td><td class="num red-text">0</td></tr>
+<tr><td class="bold">LOWRY</td><td class="num">—</td><td class="num">10</td><td class="num">—</td><td class="num">6</td><td class="num gold-text">60%</td><td class="num red-text">0</td></tr>
+<tr class="totals-row"><td>COMPANY</td><td class="num">170</td><td class="num">47</td><td class="num">27.6%</td><td class="num bold">22</td><td class="num gold-text">46.8%</td><td class="num">26</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="font-size:11px;font-weight:600;color:var(--purple);margin:12px 0 6px;letter-spacing:1px">ERICH PRIEST — PERSONAL PRODUCTION (SOUTHGLENN)</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>METRIC</th><th class="num">VALUE</th></tr></thead>
+<tbody>
+<tr><td class="bold">PA/FOs Completed</td><td class="num purple-text bold">4</td></tr>
+<tr><td class="bold">No-Shows</td><td class="num green-text">0</td></tr>
+<tr><td class="bold">Leads Assigned</td><td class="num">6</td></tr>
+<tr><td class="bold">Total Outreach (Calls/Emails/Texts)</td><td class="num bold">173</td></tr>
+<tr><td class="bold">Calls</td><td class="num">20</td></tr>
+<tr><td class="bold">Emails</td><td class="num">13</td></tr>
+<tr><td class="bold">Texts</td><td class="num">134</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);border-radius:8px;padding:12px;margin-top:10px">
+<div style="font-size:10px;letter-spacing:1px;color:var(--purple);font-weight:600;margin-bottom:4px">KEY INSIGHT — PERFORMANCE PATHWAY</div>
+<div style="font-size:11px;line-height:1.5">The pathway conversion is the biggest opportunity: only <b>27.6% of new members</b> are getting a PA/FO vs the 60% target. With 170 new members, hitting 60% would mean <b>102 PA/FOs instead of 47</b> — that's 55 more opportunities. At the current 46.8% close rate and $752 avg first sale, that gap represents <b>~$19,300 in missed new business training revenue</b>. Inverness and Lowry close rates are strong (86% and 60%) once someone sits down — the bottleneck is getting new members into the chair. ABC logging at Inverness and Lowry is also critical: zero entries means zero visibility for Erich to manage the pipeline.</div>
+</div>
+</div>
+</div>
+
 <!-- PA/FO TRACKER TAB -->
 <div id="pafo" class="tab-content">
 <div style="font-size:13px;font-weight:600;color:var(--gold);margin:0 0 16px;letter-spacing:1px">MARCH 2026 — ALL PA/FO DETAILS (SOUTHGLENN REGIONAL DASHBOARD)</div>
@@ -467,7 +544,7 @@ tr.totals-row td{border-top:2px solid var(--gold)}
 </div>
 
 <!-- MEMBERSHIP TAB -->
-<div id="mem" class="tab-content">
+<div id="mem" class="tab-content active">
 <div class="region-section">
 <div class="region-header">
 <div class="region-name">MEMBERSHIP</div>
@@ -475,38 +552,76 @@ tr.totals-row td{border-top:2px solid var(--gold)}
 </div>
 
 <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border:2px solid var(--green);border-radius:10px;padding:14px;margin-bottom:14px;text-align:center">
-<div style="font-size:9px;letter-spacing:2px;color:var(--green);margin-bottom:4px">MARCH MEMBERSHIP REVENUE</div>
-<div style="font-family:var(--mono);font-size:32px;font-weight:700;color:#fff">$60,232</div>
-<div style="font-size:10px;color:var(--muted);margin-top:2px">Goal: $52,500 — <span class="green-text" style="font-weight:700">+$7,732 OVER GOAL (115%)</span></div>
-<div class="progress-bar" style="margin-top:8px;max-width:400px;margin-left:auto;margin-right:auto"><div class="fill" style="width:100%;background:var(--green)"></div></div>
+<div style="font-size:9px;letter-spacing:2px;color:var(--green);margin-bottom:4px">MARCH MEMBERSHIP DUES & FEES</div>
+<div style="font-family:var(--mono);font-size:32px;font-weight:700;color:#fff">$164,109</div>
+<div style="font-size:10px;color:var(--muted);margin-top:2px">Target: $165,374 — <span class="red-text" style="font-weight:700">-$1,265 to Target (99.2%)</span></div>
+<div class="progress-bar" style="margin-top:8px;max-width:400px;margin-left:auto;margin-right:auto"><div class="fill" style="width:99%;background:var(--gold)"></div></div>
 </div>
 
 <div class="metric-grid">
-<div class="metric-card highlight green"><div class="val">$60,232</div><div class="lbl">ACTUAL REVENUE</div></div>
-<div class="metric-card gold"><div class="val">$52,500</div><div class="lbl">MONTHLY GOAL</div></div>
-<div class="metric-card green"><div class="val">+$7,732</div><div class="lbl">OVER GOAL</div></div>
-<div class="metric-card blue"><div class="val">115%</div><div class="lbl">% TO GOAL</div></div>
-<div class="metric-card purple"><div class="val">$154K</div><div class="lbl">ANNUAL ACTUAL</div></div>
-<div class="metric-card orange"><div class="val">$171K</div><div class="lbl">ANNUAL TARGET</div></div>
+<div class="metric-card highlight gold"><div class="val">$164,109</div><div class="lbl">DUES & FEES</div></div>
+<div class="metric-card green"><div class="val">2,612</div><div class="lbl">TOTAL MEMBERS</div></div>
+<div class="metric-card green"><div class="val">170</div><div class="lbl">NEW MEMBERS (MTD)</div></div>
+<div class="metric-card blue"><div class="val">$62.83</div><div class="lbl">AVG DUES</div></div>
+<div class="metric-card red"><div class="val">-137</div><div class="lbl">CANCELLATIONS</div></div>
+<div class="metric-card green"><div class="val">+$3,936</div><div class="lbl">MOM GROWTH</div></div>
 </div>
 
-<div style="font-size:11px;font-weight:600;color:var(--gold);margin:12px 0 6px;letter-spacing:1px">MEMBERSHIP OVERVIEW — SOUTHGLENN HUB</div>
+<div style="font-size:11px;font-weight:600;color:var(--gold);margin:12px 0 6px;letter-spacing:1px">LAG MEASURES — MEMBERSHIP RESULTS</div>
 <div class="table-wrap">
 <table>
-<thead><tr><th>METRIC</th><th class="num">GOAL</th><th class="num">ACTUAL</th><th class="num">VARIANCE</th><th class="num">%</th></tr></thead>
+<thead><tr><th>METRIC</th><th class="num">TARGET/GOAL</th><th class="num">ACTUAL</th><th class="num">VARIANCE</th><th class="num">STATUS</th></tr></thead>
 <tbody>
-<tr><td class="bold">Monthly Membership Rev</td><td class="num">$52,500</td><td class="num green-text bold">$60,232</td><td class="num green-text">+$7,732</td><td class="num green-text bold">115%</td></tr>
-<tr><td class="bold">Annual Membership Target</td><td class="num">$171,000</td><td class="num">$154,000</td><td class="num red-text">-$17,000</td><td class="num">90%</td></tr>
-<tr><td class="bold">Annual Membership Goal</td><td class="num">$160,000</td><td class="num">$154,000</td><td class="num red-text">-$6,000</td><td class="num">96%</td></tr>
-<tr><td class="bold">Total Training & Services</td><td class="num">$229,000</td><td class="num">$226,048</td><td class="num red-text">-$2,952</td><td class="num">99%</td></tr>
-<tr class="totals-row"><td>TOTAL ELITE PERFORMANCE</td><td class="num">$389,000</td><td class="num gold-text">$380,048</td><td class="num red-text">-$8,952</td><td class="num">98%</td></tr>
+<tr><td class="bold">Membership Dues & Fees</td><td class="num">$165,374</td><td class="num gold-text bold">$164,109</td><td class="num red-text">-$1,265</td><td class="num gold-text">99.2%</td></tr>
+<tr><td class="bold">New Members (MTD)</td><td class="num">149</td><td class="num green-text bold">170</td><td class="num green-text">+21</td><td class="num green-text bold">114%</td></tr>
+<tr><td class="bold">Total Members (EOM)</td><td class="num">—</td><td class="num">2,612</td><td class="num green-text">+19 MOM</td><td class="num">—</td></tr>
+<tr><td class="bold">MOM Dues Growth</td><td class="num">—</td><td class="num green-text">+$3,936</td><td class="num">—</td><td class="num green-text">Growth</td></tr>
+<tr><td class="bold">Cancellations</td><td class="num">135</td><td class="num red-text">137</td><td class="num red-text">+2</td><td class="num red-text">Over</td></tr>
+<tr><td class="bold">Avg Dues per Member</td><td class="num">$63.78</td><td class="num">$62.83</td><td class="num red-text">-$0.95</td><td class="num">98.5%</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="font-size:11px;font-weight:600;color:var(--gold);margin:12px 0 6px;letter-spacing:1px">LEADING MEASURES — TOURS, LEADS & CLOSE RATES</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>METRIC</th><th class="num">WK1</th><th class="num">WK2</th><th class="num">WK3</th><th class="num">WK4</th><th class="num">EOM TOTAL</th></tr></thead>
+<tbody>
+<tr><td class="bold">Guest Passes</td><td class="num">66</td><td class="num">56</td><td class="num">64</td><td class="num">46</td><td class="num bold">241</td></tr>
+<tr><td class="bold">Guests Sold</td><td class="num">9</td><td class="num">1</td><td class="num">5</td><td class="num">4</td><td class="num bold green-text">24</td></tr>
+<tr><td class="bold">Guest Close Rate</td><td class="num">13.6%</td><td class="num">1.8%</td><td class="num">7.8%</td><td class="num">8.7%</td><td class="num bold">10.0%</td></tr>
+<tr><td class="bold">First Time Tours</td><td class="num">16</td><td class="num">12</td><td class="num">10</td><td class="num">10</td><td class="num bold">48</td></tr>
+<tr><td class="bold">FT Tour Sold</td><td class="num">9</td><td class="num">10</td><td class="num">6</td><td class="num">3</td><td class="num bold green-text">29</td></tr>
+<tr><td class="bold">FT Tour Close %</td><td class="num">56.3%</td><td class="num green-text">83.3%</td><td class="num">60.0%</td><td class="num red-text">30.0%</td><td class="num bold green-text">60.4%</td></tr>
+<tr><td class="bold">Total ABC Leads</td><td class="num">114</td><td class="num">99</td><td class="num">101</td><td class="num">96</td><td class="num bold">427</td></tr>
+<tr><td class="bold">Total New Sales</td><td class="num">45</td><td class="num">39</td><td class="num">29</td><td class="num">35</td><td class="num bold green-text">167</td></tr>
+<tr class="totals-row"><td>OVERALL CLOSE RATE</td><td class="num">39.5%</td><td class="num">39.4%</td><td class="num">28.7%</td><td class="num">36.5%</td><td class="num bold gold-text">39.1%</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="font-size:11px;font-weight:600;color:var(--gold);margin:12px 0 6px;letter-spacing:1px">MES TEAM OUTREACH — REGER CRAIGO & TEAM</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>TEAM MEMBER</th><th class="num">WK1</th><th class="num">WK2</th><th class="num">WK3</th><th class="num">WK4</th><th class="num">TOTAL</th></tr></thead>
+<tbody>
+<tr><td class="bold gold-text">Craigo, Reger</td><td class="num">85</td><td class="num">64</td><td class="num">125</td><td class="num">85</td><td class="num bold gold-text">359</td></tr>
+<tr><td>Crawford, Trey</td><td class="num">112</td><td class="num">84</td><td class="num">100</td><td class="num">96</td><td class="num bold">392</td></tr>
+<tr><td>Castro, Jennifer</td><td class="num">55</td><td class="num">45</td><td class="num">55</td><td class="num">65</td><td class="num bold">220</td></tr>
+<tr><td>Gore, Yaz</td><td class="num">65</td><td class="num">55</td><td class="num">0</td><td class="num">52</td><td class="num bold">172</td></tr>
+<tr><td>Joel B.</td><td class="num">50</td><td class="num">50</td><td class="num">25</td><td class="num">68</td><td class="num bold">193</td></tr>
+<tr><td>Molly S.</td><td class="num">47</td><td class="num">64</td><td class="num">32</td><td class="num">25</td><td class="num bold">168</td></tr>
+<tr><td>Schoenberg, Paul</td><td class="num">10</td><td class="num">10</td><td class="num">25</td><td class="num">15</td><td class="num bold">60</td></tr>
+<tr><td>Bell, Vernon</td><td class="num">12</td><td class="num">8</td><td class="num">15</td><td class="num">20</td><td class="num bold">55</td></tr>
+<tr><td>Larson, Aris</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num bold red-text">0</td></tr>
+<tr class="totals-row"><td>TOTAL OUTREACH</td><td class="num">436</td><td class="num">380</td><td class="num">377</td><td class="num">426</td><td class="num bold">1,619</td></tr>
 </tbody>
 </table>
 </div>
 
 <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;margin-top:10px">
 <div style="font-size:10px;letter-spacing:1px;color:var(--gold);font-weight:600;margin-bottom:4px">KEY INSIGHT — MEMBERSHIP</div>
-<div style="font-size:11px;line-height:1.6">Membership is <b>the #1 leading indicator</b> — it flows through one funnel (Reger Craigo) and is primarily a <b>Southglenn operation</b>. March membership crushed goal at <b>115%</b>. Annual membership tracking at 90% of vol target ($154K of $171K) — on pace to close the gap. Membership revenue is the highest-performing segment of the business this month.</div>
+<div style="font-size:11px;line-height:1.5">Membership dues at <b>$164,109</b> — just $1,265 short of the $165,374 target (99.2%). New members at <b>170 vs 149 goal (114%)</b> — crushing it. First Time Tour close rate at <b>60.4%</b> is elite. Cancellations at 137 slightly above 135 goal. MOM dues growth is <b>+$3,936</b>. Reger Craigo's team outreach is strong at 1,619 total touches, but Aris Larson at zero needs attention. Week 4 FT Tour close rate dropped to 30% — worth investigating.</div>
 </div>
 </div>
 </div>
@@ -550,11 +665,12 @@ DATA: REGIONAL DASHBOARDS + ABC REPORT — MARCH 2026
 
 <script>
 function showTab(id,e){
-document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+var scrollPos=window.scrollY;
+document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active')});
+document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
 document.getElementById(id).classList.add('active');
 (e||event).target.classList.add('active');
-document.querySelector('.tabs').scrollIntoView({behavior:'smooth',block:'nearest'});
+window.scrollTo(0,scrollPos);
 }
 </script>
 </body>
