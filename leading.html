@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Elite Leads">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#07090D">
+<title>Elite Performance Center — Leading Measures — March 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#07090D;--surface:#0C1017;--card:#111827;--border:#1E293B;--gold:#C9A84C;--green:#34D399;--blue:#60A5FA;--purple:#A78BFA;--red:#F87171;--orange:#FB923C;--text:#E2E8F0;--muted:#94A3B8;--font:'DM Sans',sans-serif;--mono:'IBM Plex Mono',monospace}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;padding:16px;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+.header{text-align:center;margin-bottom:24px}
+.header h1{font-size:22px;font-weight:700;letter-spacing:1px}
+.header p{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:4px}
+.back-link{display:inline-block;color:var(--gold);text-decoration:none;font-size:13px;margin-bottom:12px;opacity:.8}
+.back-link:hover{opacity:1}
+
+/* Leading vs Lag Banner */
+.lead-lag-banner{background:linear-gradient(135deg,#0f172a,#1e1b4b);border:1px solid var(--purple);border-radius:12px;padding:20px;margin-bottom:24px;text-align:center}
+.lead-lag-banner h2{font-size:14px;letter-spacing:2px;color:var(--purple);margin-bottom:8px}
+.lead-lag-banner .big-num{font-family:var(--mono);font-size:48px;font-weight:700;color:#fff}
+.lead-lag-banner .sub{color:var(--muted);font-size:13px;margin-top:4px}
+.lead-lag-row{display:flex;gap:12px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.lead-lag-item{background:rgba(255,255,255,.05);border-radius:8px;padding:12px 20px;min-width:120px}
+.lead-lag-item .val{font-family:var(--mono);font-size:22px;font-weight:700}
+.lead-lag-item .lbl{font-size:11px;color:var(--muted);letter-spacing:1px;margin-top:2px}
+
+/* Tabs */
+.tabs{display:flex;gap:4px;margin-bottom:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:10px 18px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:var(--font);font-size:13px;font-weight:600;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.tab.active{background:var(--gold);color:#000;border-color:var(--gold)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* Region Cards */
+.region-section{margin-bottom:28px}
+.region-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.region-name{font-size:18px;font-weight:700;letter-spacing:1px}
+.region-badge{font-size:11px;padding:4px 10px;border-radius:20px;font-weight:600}
+
+/* Metric Grid */
+.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.metric-card .val{font-family:var(--mono);font-size:26px;font-weight:700}
+.metric-card .lbl{font-size:11px;color:var(--muted);letter-spacing:1px;margin-top:2px}
+.metric-card.highlight{border-color:var(--gold);background:linear-gradient(135deg,rgba(201,168,76,.08),transparent)}
+.metric-card.green .val{color:var(--green)}
+.metric-card.blue .val{color:var(--blue)}
+.metric-card.purple .val{color:var(--purple)}
+.metric-card.gold .val{color:var(--gold)}
+.metric-card.red .val{color:var(--red)}
+.metric-card.orange .val{color:var(--orange)}
+
+/* Tables */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:16px;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:var(--surface)}
+th{padding:10px 12px;text-align:left;font-size:11px;letter-spacing:1px;color:var(--muted);font-weight:600;white-space:nowrap;border-bottom:1px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--border);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.num{font-family:var(--mono);text-align:right}
+.green-text{color:var(--green)}
+.red-text{color:var(--red)}
+.gold-text{color:var(--gold)}
+.blue-text{color:var(--blue)}
+.purple-text{color:var(--purple)}
+.bold{font-weight:700}
+tr.totals-row{background:rgba(201,168,76,.1);font-weight:700}
+tr.totals-row td{border-top:2px solid var(--gold)}
+
+/* Funnel */
+.funnel{display:flex;flex-direction:column;gap:4px;margin:16px 0}
+.funnel-step{display:flex;align-items:center;gap:12px;padding:10px 16px;border-radius:8px;background:var(--card);border:1px solid var(--border)}
+.funnel-step .icon{font-size:20px;width:32px;text-align:center}
+.funnel-step .info{flex:1}
+.funnel-step .info .name{font-size:13px;font-weight:600}
+.funnel-step .info .rate{font-size:11px;color:var(--muted)}
+.funnel-step .count{font-family:var(--mono);font-size:22px;font-weight:700}
+.funnel-arrow{text-align:center;color:var(--muted);font-size:16px}
+
+/* Delta badge */
+.delta{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;margin-left:8px}
+.delta.pos{background:rgba(52,211,153,.15);color:var(--green)}
+.delta.neg{background:rgba(248,113,113,.15);color:var(--red)}
+.delta.neutral{background:rgba(148,163,184,.15);color:var(--muted)}
+
+/* 4DX WIG section */
+.wig-card{background:linear-gradient(135deg,#1a1a2e,#16213e);border:2px solid var(--gold);border-radius:12px;padding:20px;margin-bottom:20px}
+.wig-card h3{color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:12px}
+.wig-row{display:flex;gap:16px;flex-wrap:wrap}
+.wig-item{flex:1;min-width:200px;background:rgba(0,0,0,.3);border-radius:8px;padding:16px;text-align:center}
+.wig-item .wig-val{font-family:var(--mono);font-size:32px;font-weight:700}
+.wig-item .wig-target{font-size:12px;color:var(--muted);margin-top:4px}
+.wig-item .wig-label{font-size:12px;color:var(--gold);margin-top:8px;font-weight:600}
+
+/* Progress bar */
+.progress-bar{height:6px;background:rgba(255,255,255,.1);border-radius:3px;margin-top:8px;overflow:hidden}
+.progress-bar .fill{height:100%;border-radius:3px;transition:width .5s}
+
+@media(max-width:768px){
+  body{padding:10px}
+  .header h1{font-size:18px}
+  .lead-lag-banner .big-num{font-size:36px}
+  .metric-grid{grid-template-columns:repeat(2,1fr)}
+  .wig-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<a href="https://jimrhendricks-cmd.github.io/elite-dashboards/" class="back-link">← Back to Master Dashboard</a>
+<div class="header">
+<h1>Elite Performance Center</h1>
+<p>LEADING MEASURES COMMAND CENTER — MARCH 2026</p>
+</div>
+
+<!-- Company-Wide Leading Measures Banner -->
+<div class="lead-lag-banner">
+<h2>COMPANY-WIDE LEADING ACTIVITY</h2>
+<div class="big-num" id="h-contacts">1,508</div>
+<div class="sub">Total Contacts Across All Regions</div>
+<div class="lead-lag-row">
+<div class="lead-lag-item">
+<div class="val green-text">117</div>
+<div class="lbl">LEADS</div>
+</div>
+<div class="lead-lag-item">
+<div class="val blue-text">47</div>
+<div class="lbl">PA / FO BOOKED</div>
+</div>
+<div class="lead-lag-item">
+<div class="val gold-text">26</div>
+<div class="lbl">ABC CONFIRMED</div>
+</div>
+<div class="lead-lag-item">
+<div class="val purple-text">22</div>
+<div class="lbl">SOLD</div>
+</div>
+</div>
+</div>
+
+<!-- 4DX WIG Cards -->
+<div class="wig-card">
+<h3>WILDLY IMPORTANT GOALS — LEADING MEASURES</h3>
+<div class="wig-row">
+<div class="wig-item">
+<div class="wig-val green-text">1,508</div>
+<div class="wig-target">Target: 1,500 / month</div>
+<div class="progress-bar"><div class="fill" style="width:100%;background:var(--green)"></div></div>
+<div class="wig-label">TOTAL CONTACTS</div>
+</div>
+<div class="wig-item">
+<div class="wig-val blue-text">47</div>
+<div class="wig-target">Target: 60 / month</div>
+<div class="progress-bar"><div class="fill" style="width:78%;background:var(--blue)"></div></div>
+<div class="wig-label">PA / FO BOOKED</div>
+</div>
+<div class="wig-item">
+<div class="wig-val gold-text">55%</div>
+<div class="wig-target">Target: 65%</div>
+<div class="progress-bar"><div class="fill" style="width:85%;background:var(--gold)"></div></div>
+<div class="wig-label">PA/FO → SOLD RATE</div>
+</div>
+<div class="wig-item">
+<div class="wig-val purple-text">3.1%</div>
+<div class="wig-target">Target: 5%</div>
+<div class="progress-bar"><div class="fill" style="width:62%;background:var(--purple)"></div></div>
+<div class="wig-label">CONTACT → LEAD %</div>
+</div>
+</div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+<button class="tab active" onclick="showTab('all')">Company Overview</button>
+<button class="tab" onclick="showTab('sg')">Southglenn</button>
+<button class="tab" onclick="showTab('inv')">Inverness</button>
+<button class="tab" onclick="showTab('low')">Lowry</button>
+<button class="tab" onclick="showTab('pafo')">PA/FO Tracker</button>
+<button class="tab" onclick="showTab('funnel')">Sales Funnel</button>
+<button class="tab" onclick="showTab('delta')">Self vs ABC Delta</button>
+</div>
+
+<!-- COMPANY OVERVIEW TAB -->
+<div id="all" class="tab-content active">
+<div class="metric-grid">
+<div class="metric-card highlight gold"><div class="val">1,508</div><div class="lbl">TOTAL CONTACTS</div></div>
+<div class="metric-card green"><div class="val">117</div><div class="lbl">TOTAL LEADS</div></div>
+<div class="metric-card blue"><div class="val">47</div><div class="lbl">PA/FO BOOKED</div></div>
+<div class="metric-card purple"><div class="val">26</div><div class="lbl">ABC CONFIRMED PA/FO</div></div>
+<div class="metric-card orange"><div class="val">22</div><div class="lbl">CLOSED / SOLD</div></div>
+<div class="metric-card red"><div class="val">21</div><div class="lbl">DELTA (Self vs ABC)</div></div>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>REGION</th><th class="num">CONTACTS</th><th class="num">LEADS</th><th class="num">PA/FO (Self)</th><th class="num">PA/FO (ABC)</th><th class="num">DELTA</th><th class="num">SOLD</th><th class="num">CONTACT→LEAD</th><th class="num">LEAD→PA</th><th class="num">PA→CLOSE</th></tr></thead>
+<tbody>
+<tr><td><span class="bold">SOUTHGLENN</span></td><td class="num">505</td><td class="num">15</td><td class="num">21</td><td class="num">26</td><td class="num green-text">+5</td><td class="num">10</td><td class="num">3.0%</td><td class="num">140%</td><td class="num gold-text">48%</td></tr>
+<tr><td><span class="bold">INVERNESS</span></td><td class="num">902</td><td class="num">7</td><td class="num">7</td><td class="num">0</td><td class="num red-text">-7</td><td class="num">6</td><td class="num">0.8%</td><td class="num">100%</td><td class="num gold-text">86%</td></tr>
+<tr><td><span class="bold">LOWRY</span></td><td class="num">101</td><td class="num">101</td><td class="num">10</td><td class="num">0</td><td class="num red-text">-10</td><td class="num">6</td><td class="num">—</td><td class="num">10%</td><td class="num gold-text">60%</td></tr>
+<tr class="totals-row"><td>COMPANY TOTAL</td><td class="num">1,508</td><td class="num">117</td><td class="num">47</td><td class="num">26</td><td class="num">-21</td><td class="num">22</td><td class="num">3.1%</td><td class="num">40%</td><td class="num gold-text">55%</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-top:12px">
+<div style="font-size:12px;letter-spacing:1px;color:var(--gold);font-weight:600;margin-bottom:8px">KEY INSIGHT</div>
+<div style="font-size:14px;line-height:1.6">Inverness is <b>crushing contacts</b> (902) but converting at only <b>0.8% to leads</b> — they need to qualify harder. Southglenn has the best PA/FO engine with 26 ABC-confirmed, but only 505 contacts — more volume wins. Lowry's self-listed PA/FO (10) aren't showing in ABC — need to log them in the system.</div>
+</div>
+</div>
+
+<!-- SOUTHGLENN TAB -->
+<div id="sg" class="tab-content">
+<div class="region-section">
+<div class="region-header">
+<div class="region-name">SOUTHGLENN</div>
+<span class="region-badge" style="background:rgba(52,211,153,.15);color:var(--green)">Top PA/FO Producer</span>
+</div>
+<div class="metric-grid">
+<div class="metric-card highlight gold"><div class="val">505</div><div class="lbl">TOTAL CONTACTS</div></div>
+<div class="metric-card green"><div class="val">15</div><div class="lbl">LEADS</div></div>
+<div class="metric-card blue"><div class="val">21</div><div class="lbl">PA/FO SELF-LISTED</div></div>
+<div class="metric-card purple"><div class="val">26</div><div class="lbl">ABC CONFIRMED</div></div>
+<div class="metric-card orange"><div class="val">10</div><div class="lbl">SOLD</div></div>
+<div class="metric-card green"><div class="val">48%</div><div class="lbl">PA → CLOSE RATE</div></div>
+</div>
+
+<div style="font-size:13px;font-weight:600;color:var(--gold);margin:16px 0 8px;letter-spacing:1px">TRAINER CONTACT ACTIVITY</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>TRAINER</th><th class="num">LEADS</th><th class="num">CALLS</th><th class="num">TALK-TO</th><th class="num">EMAILS</th><th class="num">IG</th><th class="num">IG STORY</th><th class="num">TEXT</th><th class="num">TOTAL</th><th class="num">FO/PA</th><th class="num">NEW</th></tr></thead>
+<tbody>
+<tr><td>Kaleb L.</td><td class="num">2</td><td class="num">12</td><td class="num">15</td><td class="num">6</td><td class="num">3</td><td class="num">8</td><td class="num">62</td><td class="num bold">108</td><td class="num blue-text">0</td><td class="num">4</td></tr>
+<tr><td>Andrew W.</td><td class="num">1</td><td class="num">32</td><td class="num">55</td><td class="num">7</td><td class="num">12</td><td class="num">2</td><td class="num">48</td><td class="num bold">157</td><td class="num blue-text">1</td><td class="num">—</td></tr>
+<tr><td>A. Wiater</td><td class="num">2</td><td class="num">5</td><td class="num">53</td><td class="num">2</td><td class="num">3</td><td class="num">1</td><td class="num">63</td><td class="num bold">129</td><td class="num blue-text">0</td><td class="num">3</td></tr>
+<tr><td>Robert B.</td><td class="num">5</td><td class="num">7</td><td class="num">10</td><td class="num">6</td><td class="num">16</td><td class="num">1</td><td class="num">23</td><td class="num bold">68</td><td class="num blue-text">1</td><td class="num">9</td></tr>
+<tr><td>Maurice P.</td><td class="num">2</td><td class="num">14</td><td class="num">22</td><td class="num">14</td><td class="num">15</td><td class="num">7</td><td class="num">14</td><td class="num bold">88</td><td class="num blue-text">1</td><td class="num">9</td></tr>
+<tr><td>Trevor F.</td><td class="num">5</td><td class="num">0</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">10</td><td class="num">2</td><td class="num bold">19</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr><td>Camala R.</td><td class="num">0</td><td class="num">7</td><td class="num">10</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num bold">17</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr><td>D. Edwards</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">12</td><td class="num bold">12</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr><td>Ethan M.</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num bold">0</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr><td>Dustin G.</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num bold">—</td><td class="num blue-text">—</td><td class="num">—</td></tr>
+<tr><td>Brendan Z.</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num bold">0</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr><td>Megan W.</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num bold">—</td><td class="num blue-text">—</td><td class="num">—</td></tr>
+<tr><td>Anne Marie</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num bold">2</td><td class="num blue-text">—</td><td class="num">—</td></tr>
+<tr class="totals-row"><td>TOTAL</td><td class="num">15</td><td class="num">65</td><td class="num">167</td><td class="num">29</td><td class="num">46</td><td class="num">21</td><td class="num">162</td><td class="num bold">505</td><td class="num blue-text">3</td><td class="num">21</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="font-size:13px;font-weight:600;color:var(--gold);margin:16px 0 8px;letter-spacing:1px">SG PA/FO LOG (ABC REPORT — 26 COMPLETED)</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>TRAINER</th><th class="num">FO</th><th class="num">PA</th><th class="num">TOTAL</th></tr></thead>
+<tbody>
+<tr><td>Beserra, Robert</td><td class="num">0</td><td class="num">5</td><td class="num bold green-text">5</td></tr>
+<tr><td>Perez, Maurice</td><td class="num">4</td><td class="num">0</td><td class="num bold green-text">4</td></tr>
+<tr><td>Priest, Erich</td><td class="num">4</td><td class="num">0</td><td class="num bold green-text">4</td></tr>
+<tr><td>Bormuth, Stephanie</td><td class="num">3</td><td class="num">0</td><td class="num bold green-text">3</td></tr>
+<tr><td>Watson, Andrew</td><td class="num">1</td><td class="num">2</td><td class="num bold green-text">3</td></tr>
+<tr><td>Edwards, Deonta</td><td class="num">0</td><td class="num">2</td><td class="num bold">2</td></tr>
+<tr><td>Sargent, Wyatt</td><td class="num">0</td><td class="num">2</td><td class="num bold">2</td></tr>
+<tr><td>Greenwood, Dustin</td><td class="num">0</td><td class="num">1</td><td class="num bold">1</td></tr>
+<tr><td>Wiater, Alec</td><td class="num">1</td><td class="num">0</td><td class="num bold">1</td></tr>
+<tr><td>Zeien, Brendan</td><td class="num">0</td><td class="num">1</td><td class="num bold">1</td></tr>
+<tr class="totals-row"><td>TOTAL</td><td class="num">13</td><td class="num">13</td><td class="num bold">26</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- INVERNESS TAB -->
+<div id="inv" class="tab-content">
+<div class="region-section">
+<div class="region-header">
+<div class="region-name">INVERNESS</div>
+<span class="region-badge" style="background:rgba(96,165,250,.15);color:var(--blue)">Contact Volume Leader</span>
+</div>
+<div class="metric-grid">
+<div class="metric-card highlight gold"><div class="val">902</div><div class="lbl">TOTAL CONTACTS</div></div>
+<div class="metric-card green"><div class="val">7</div><div class="lbl">LEADS</div></div>
+<div class="metric-card blue"><div class="val">7</div><div class="lbl">PA/FO (SELF)</div></div>
+<div class="metric-card red"><div class="val">0</div><div class="lbl">ABC CONFIRMED</div></div>
+<div class="metric-card orange"><div class="val">6</div><div class="lbl">SOLD</div></div>
+<div class="metric-card green"><div class="val">86%</div><div class="lbl">PA → CLOSE RATE</div></div>
+</div>
+
+<div style="font-size:13px;font-weight:600;color:var(--gold);margin:16px 0 8px;letter-spacing:1px">TRAINER CONTACT ACTIVITY</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>TRAINER</th><th class="num">LEADS</th><th class="num">CALLS</th><th class="num">EMAILS</th><th class="num">TEXTS</th><th class="num">TOTAL</th><th class="num">PA/FO</th><th class="num">PA SOLD</th></tr></thead>
+<tbody>
+<tr><td>Stephanie B.</td><td class="num">1</td><td class="num">0</td><td class="num">300</td><td class="num">50</td><td class="num bold">351</td><td class="num blue-text">—</td><td class="num green-text">1</td></tr>
+<tr><td>Erich P.</td><td class="num">6</td><td class="num">20</td><td class="num">13</td><td class="num">134</td><td class="num bold">173</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr><td>Ryan M.</td><td class="num">0</td><td class="num">46</td><td class="num">53</td><td class="num">65</td><td class="num bold">164</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr><td>Matt G.</td><td class="num">0</td><td class="num">33</td><td class="num">97</td><td class="num">27</td><td class="num bold">157</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr><td>Rory L.</td><td class="num">0</td><td class="num">31</td><td class="num">54</td><td class="num">28</td><td class="num bold">113</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr><td>Wyatt S.</td><td class="num">0</td><td class="num">26</td><td class="num">25</td><td class="num">50</td><td class="num bold">101</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr><td>Makenzi</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num bold">0</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr><td>Max</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num bold">0</td><td class="num blue-text">0</td><td class="num">0</td></tr>
+<tr class="totals-row"><td>TOTAL</td><td class="num">7</td><td class="num">156</td><td class="num">542</td><td class="num">354</td><td class="num bold">902</td><td class="num blue-text">0</td><td class="num green-text">1</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="font-size:13px;font-weight:600;color:var(--gold);margin:16px 0 8px;letter-spacing:1px">INV PA/FO LOG (FROM REGIONAL DASHBOARD — 7 BOOKED)</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>CLIENT</th><th>DATE</th><th>TRAINER</th><th>LOC</th><th class="num">EST SALE</th><th>SOLD</th><th class="num">REVENUE</th></tr></thead>
+<tbody>
+<tr><td>Rebekah P.</td><td>Mar 2</td><td>SB</td><td>INV</td><td class="num">$1,000</td><td class="green-text">✓</td><td class="num">$1,000</td></tr>
+<tr><td>Maria R-S.</td><td>Mar 4</td><td>SB</td><td>SG</td><td class="num">$550</td><td class="green-text">✓</td><td class="num">$550</td></tr>
+<tr><td>Cooper J.</td><td>Mar 6</td><td>WS</td><td>DC</td><td class="num">$1,500</td><td class="green-text">✓</td><td class="num">$3,000</td></tr>
+<tr><td>Tatum J.</td><td>Mar 4</td><td>WS</td><td>DC</td><td class="num">$1,500</td><td class="green-text">✓</td><td class="num">—</td></tr>
+<tr><td>Carrie D.</td><td>Mar 26</td><td>SB</td><td>SG</td><td class="num">$1,500</td><td class="green-text">✓</td><td class="num">$1,725</td></tr>
+<tr><td>Jacob M.</td><td>Mar 6</td><td>WS</td><td>DC</td><td class="num">$580</td><td class="green-text">✓</td><td class="num">$580</td></tr>
+<tr><td>Jace S.</td><td>Mar 20</td><td>WS</td><td>DC</td><td class="num">$580</td><td class="green-text">✓</td><td class="num">$580</td></tr>
+<tr class="totals-row"><td colspan="4">TOTAL</td><td class="num">$7,210</td><td>6/7</td><td class="num gold-text">$7,435</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:10px;padding:16px;margin-top:12px">
+<div style="font-size:12px;letter-spacing:1px;color:var(--red);font-weight:600;margin-bottom:8px">⚠ ACTION NEEDED</div>
+<div style="font-size:14px;line-height:1.6">Inverness has <b>0 PA/FOs in the ABC system</b> despite 7 self-listed. These need to be logged as Performance Assessments or Fitness Overviews in ABC for accurate tracking. 902 contacts with only 7 leads = massive volume but <b>low qualification</b>.</div>
+</div>
+</div>
+</div>
+
+<!-- LOWRY TAB -->
+<div id="low" class="tab-content">
+<div class="region-section">
+<div class="region-header">
+<div class="region-name">LOWRY</div>
+<span class="region-badge" style="background:rgba(167,139,250,.15);color:var(--purple)">Highest Lead Volume</span>
+</div>
+<div class="metric-grid">
+<div class="metric-card highlight gold"><div class="val">101</div><div class="lbl">LEADS GENERATED</div></div>
+<div class="metric-card green"><div class="val">82</div><div class="lbl">CONTACT 1</div></div>
+<div class="metric-card blue"><div class="val">55</div><div class="lbl">CONTACT 2</div></div>
+<div class="metric-card purple"><div class="val">10</div><div class="lbl">PA/FO (SELF)</div></div>
+<div class="metric-card red"><div class="val">0</div><div class="lbl">ABC CONFIRMED</div></div>
+<div class="metric-card orange"><div class="val">6</div><div class="lbl">SOLD</div></div>
+</div>
+
+<div style="font-size:13px;font-weight:600;color:var(--gold);margin:16px 0 8px;letter-spacing:1px">TRAINER LEAD DISTRIBUTION</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>TRAINER</th><th class="num">LEADS</th><th class="num">CONTACT 1</th><th class="num">CONTACT 2</th><th class="num">CONTACT 3</th><th class="num">PA/FO</th><th class="num">SOLD</th></tr></thead>
+<tbody>
+<tr><td>Lera R. (LR)</td><td class="num bold">38</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num blue-text">—</td><td class="num">—</td></tr>
+<tr><td>Yushin G. (YG)</td><td class="num bold">30</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num blue-text">—</td><td class="num">—</td></tr>
+<tr><td>Adin C. (AC)</td><td class="num bold">19</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num blue-text">—</td><td class="num">—</td></tr>
+<tr><td>Lyric M. (LM)</td><td class="num bold">7</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num blue-text">—</td><td class="num">—</td></tr>
+<tr><td>Derrick M. (DM)</td><td class="num bold">6</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num blue-text">—</td><td class="num">—</td></tr>
+<tr><td>Other</td><td class="num">1</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num blue-text">—</td><td class="num">—</td></tr>
+<tr class="totals-row"><td>TOTAL</td><td class="num">101</td><td class="num">82</td><td class="num">55</td><td class="num">32</td><td class="num blue-text">10</td><td class="num green-text">6</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="font-size:13px;font-weight:600;color:var(--gold);margin:16px 0 8px;letter-spacing:1px">LEAD SOURCES</div>
+<div class="metric-grid">
+<div class="metric-card blue"><div class="val">49</div><div class="lbl">INSTAGRAM</div></div>
+<div class="metric-card green"><div class="val">19</div><div class="lbl">RAPIDS</div></div>
+<div class="metric-card purple"><div class="val">5</div><div class="lbl">REFERRAL</div></div>
+<div class="metric-card orange"><div class="val">4</div><div class="lbl">SMA</div></div>
+<div class="metric-card"><div class="val">3</div><div class="lbl">SWIM</div></div>
+<div class="metric-card"><div class="val">21</div><div class="lbl">OTHER</div></div>
+</div>
+
+<div style="background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:10px;padding:16px;margin-top:12px">
+<div style="font-size:12px;letter-spacing:1px;color:var(--red);font-weight:600;margin-bottom:8px">⚠ ACTION NEEDED</div>
+<div style="font-size:14px;line-height:1.6">Lowry reports <b>10 PA/FOs self-listed</b> (9 PA, 1 FO) but <b>0 appear in ABC</b>. All PA/FOs must be logged in the ABC system. Instagram drives 49% of leads — double down on this channel. Contact follow-up drops from 82 → 55 → 32 — tighten the 2nd and 3rd touch.</div>
+</div>
+</div>
+</div>
+
+<!-- PA/FO TRACKER TAB -->
+<div id="pafo" class="tab-content">
+<div style="font-size:13px;font-weight:600;color:var(--gold);margin:0 0 16px;letter-spacing:1px">MARCH 2026 — ALL PA/FO DETAILS (SOUTHGLENN REGIONAL DASHBOARD)</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>#</th><th>CLIENT</th><th>DATE</th><th>TRAINER</th><th>SELF/MAIN</th><th class="num">EST SALE</th><th>SOLD</th><th class="num">REVENUE</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Amanda Court</td><td>Mar 2</td><td>MP</td><td>Self Gen</td><td class="num">$900</td><td class="green-text bold">✓</td><td class="num">$900</td></tr>
+<tr><td>2</td><td>Charlie Swans</td><td>Mar 3</td><td>MP</td><td>Mainline</td><td class="num">$550</td><td class="red-text">✗</td><td class="num">—</td></tr>
+<tr><td>3</td><td>Thomas B.</td><td>Mar 3</td><td>KL</td><td>Self Gen</td><td class="num">$1,500</td><td class="green-text bold">✓</td><td class="num">$1,500</td></tr>
+<tr><td>4</td><td>James Neilson</td><td>Mar 7</td><td>BZ</td><td>Self Gen</td><td class="num">$1,650</td><td class="green-text bold">✓</td><td class="num">$1,000</td></tr>
+<tr><td>5</td><td>Ivan Semien</td><td>Mar 7</td><td>TA</td><td>Self Gen</td><td class="num">$480</td><td class="green-text bold">✓</td><td class="num">$2,200</td></tr>
+<tr><td>6</td><td>Antong Guo</td><td>Mar 8</td><td>RB</td><td>Self Gen</td><td class="num">$550</td><td class="red-text">—</td><td class="num">—</td></tr>
+<tr><td>7</td><td>Charmanine J.</td><td>Resch.</td><td>TA</td><td>Self Gen</td><td class="num">$340</td><td class="red-text">—</td><td class="num">—</td></tr>
+<tr><td>8</td><td>Jojo Naser</td><td>Mar 16</td><td>RB</td><td>Self Gen</td><td class="num">$480</td><td class="green-text bold">✓</td><td class="num">—</td></tr>
+<tr><td>9</td><td>Jacob Carey</td><td>Mar 16</td><td>RB</td><td>Self Gen</td><td class="num">—</td><td class="red-text">—</td><td class="num">—</td></tr>
+<tr><td>10</td><td>Charles Kim</td><td>Mar 18</td><td>AW</td><td>Stretch Lead</td><td class="num">—</td><td class="green-text bold">✓</td><td class="num">$1,325</td></tr>
+<tr><td>11</td><td>Will Stone</td><td>Mar 20</td><td>RB</td><td>Self Gen</td><td class="num">$550</td><td class="red-text">—</td><td class="num">—</td></tr>
+<tr><td>12</td><td>Lincoln L.</td><td>Mar 12</td><td>EM</td><td>—</td><td class="num">$550</td><td class="green-text bold">✓</td><td class="num">—</td></tr>
+<tr><td>13</td><td>John Morgan</td><td>Mar 20</td><td>KL</td><td>Self Gen</td><td class="num">$900</td><td class="green-text bold">✓</td><td class="num">—</td></tr>
+<tr><td>14</td><td>Bubba T.</td><td>Mar 23</td><td>KL</td><td>Self Gen</td><td class="num">$900</td><td class="green-text bold">✓</td><td class="num">$600</td></tr>
+<tr><td>15</td><td>Reis Russell</td><td>Resch.</td><td>BZ</td><td>Self Gen</td><td class="num">—</td><td class="red-text">—</td><td class="num">—</td></tr>
+<tr><td>16</td><td>Nathan M.</td><td>Mar 26</td><td>MP</td><td>Mainline</td><td class="num">$550</td><td class="red-text">—</td><td class="num">—</td></tr>
+<tr><td>17</td><td>Elliot Cilia</td><td>Mar 29</td><td>RB</td><td>Self Gen</td><td class="num">$1,650</td><td class="green-text bold">✓</td><td class="num">—</td></tr>
+<tr><td>18</td><td>Cristian Cruz</td><td>Mar 30</td><td>MP</td><td>Self Gen</td><td class="num">—</td><td class="red-text">✗</td><td class="num">—</td></tr>
+<tr><td>19</td><td>Theo Lee</td><td>Mar 24</td><td>AW</td><td>Self Gen</td><td class="num">—</td><td class="red-text">✗</td><td class="num">—</td></tr>
+<tr><td>20</td><td>Micah Grimes</td><td>Mar 31</td><td>DG</td><td>Tim Ref</td><td class="num">$1,650</td><td class="red-text">✗</td><td class="num">—</td></tr>
+<tr class="totals-row"><td colspan="5">TOTAL: 20 PA/FOs (2 Rescheduled)</td><td class="num">—</td><td class="gold-text">10 Sold</td><td class="num gold-text">$7,525+</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- FUNNEL TAB -->
+<div id="funnel" class="tab-content">
+<div style="font-size:13px;font-weight:600;color:var(--gold);margin:0 0 16px;letter-spacing:1px">COMPANY SALES FUNNEL — MARCH 2026</div>
+<div class="funnel">
+<div class="funnel-step" style="border-left:4px solid var(--blue)">
+<div class="icon">📣</div>
+<div class="info"><div class="name">Total Contacts</div><div class="rate">Calls, texts, emails, IG, talk-to</div></div>
+<div class="count blue-text">1,508</div>
+</div>
+<div class="funnel-arrow">↓ <span style="font-size:11px">7.8% conversion</span></div>
+<div class="funnel-step" style="border-left:4px solid var(--green)">
+<div class="icon">🎯</div>
+<div class="info"><div class="name">Qualified Leads</div><div class="rate">Expressed interest, gave contact info</div></div>
+<div class="count green-text">117</div>
+</div>
+<div class="funnel-arrow">↓ <span style="font-size:11px">40% booked</span></div>
+<div class="funnel-step" style="border-left:4px solid var(--purple)">
+<div class="icon">📋</div>
+<div class="info"><div class="name">PA / FO Booked (Self-Listed)</div><div class="rate">Performance Assessment or Fitness Overview scheduled</div></div>
+<div class="count purple-text">47</div>
+</div>
+<div class="funnel-arrow">↓ <span style="font-size:11px">55% of booked confirmed in ABC</span></div>
+<div class="funnel-step" style="border-left:4px solid var(--gold)">
+<div class="icon">✅</div>
+<div class="info"><div class="name">ABC Confirmed PA/FO</div><div class="rate">Logged in system — verified completed</div></div>
+<div class="count gold-text">26</div>
+</div>
+<div class="funnel-arrow">↓ <span style="font-size:11px">~55% close rate (from self-listed)</span></div>
+<div class="funnel-step" style="border-left:4px solid var(--orange)">
+<div class="icon">💰</div>
+<div class="info"><div class="name">Closed / Sold</div><div class="rate">Signed training package</div></div>
+<div class="count orange-text" style="color:var(--orange)">22</div>
+</div>
+</div>
+
+<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-top:16px">
+<div style="font-size:12px;letter-spacing:1px;color:var(--gold);font-weight:600;margin-bottom:8px">FUNNEL OPTIMIZATION TARGETS</div>
+<div style="font-size:14px;line-height:1.8">
+<b>Contact → Lead (7.8%)</b>: Target 10%. More qualifying conversations, not just volume.<br>
+<b>Lead → PA/FO (40%)</b>: Target 50%. Speed-to-PA is the key — book within 48hrs of lead.<br>
+<b>PA/FO → Sold (55%)</b>: Already strong. Maintain by nailing the PA experience.<br>
+<b>ABC Logging Gap</b>: 21 self-listed PA/FOs not in ABC. Fix this immediately.
+</div>
+</div>
+</div>
+
+<!-- DELTA TAB -->
+<div id="delta" class="tab-content">
+<div style="font-size:13px;font-weight:600;color:var(--gold);margin:0 0 16px;letter-spacing:1px">SELF-LISTED vs ABC SYSTEM — DELTA ANALYSIS</div>
+
+<div class="metric-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px">
+<div class="metric-card blue"><div class="val">47</div><div class="lbl">SELF-LISTED PA/FO</div></div>
+<div class="metric-card purple"><div class="val">26</div><div class="lbl">ABC CONFIRMED</div></div>
+<div class="metric-card red"><div class="val">-21</div><div class="lbl">DELTA (GAP)</div></div>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>REGION</th><th class="num">SELF-LISTED</th><th class="num">ABC REPORT</th><th class="num">DELTA</th><th>NOTES</th></tr></thead>
+<tbody>
+<tr><td class="bold">SOUTHGLENN</td><td class="num">21</td><td class="num">26</td><td class="num green-text bold">+5</td><td style="font-size:12px">ABC shows MORE than self-listed — trainers doing PAs they aren't logging on their sheets</td></tr>
+<tr><td class="bold">INVERNESS</td><td class="num">7</td><td class="num">0</td><td class="num red-text bold">-7</td><td style="font-size:12px">Zero ABC entries — PAs not being logged in the system at all</td></tr>
+<tr><td class="bold">LOWRY</td><td class="num">10</td><td class="num">0</td><td class="num red-text bold">-10</td><td style="font-size:12px">Zero ABC entries — same issue, PAs/FOs must be entered</td></tr>
+<tr class="totals-row"><td>COMPANY</td><td class="num">47</td><td class="num">26</td><td class="num red-text bold">-21</td><td style="font-size:12px">44% of PA/FOs not in ABC</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:10px;padding:16px;margin-top:16px">
+<div style="font-size:12px;letter-spacing:1px;color:var(--red);font-weight:600;margin-bottom:8px">CRITICAL GAP — INVERNESS & LOWRY</div>
+<div style="font-size:14px;line-height:1.8">
+<b>Inverness</b>: Wyatt and Stephanie are closing ($5,710+ from 7 PAs) but NONE are in ABC. The PA/FO needs to be created as an event type in the ABC scheduling system before each session.<br><br>
+<b>Lowry</b>: 9 PAs and 1 FO self-listed with 6 closed sales, but zero ABC entries. This means management has no visibility into the actual PA pipeline unless they check the Google Sheet manually.<br><br>
+<b>Fix</b>: Every PA/FO must be scheduled through ABC as either "Performance Assessment" or "Fitness Overview" event type. Train all regions on this process. Southglenn is the model — their ABC numbers actually <i>exceed</i> self-listed, meaning they're doing it right.
+</div>
+</div>
+</div>
+
+<div style="text-align:center;padding:40px 0 20px;color:var(--muted);font-size:11px;letter-spacing:1px">
+ELITE PERFORMANCE CENTER — LEADING MEASURES COMMAND CENTER<br>
+DATA: REGIONAL DASHBOARDS + ABC REPORT — MARCH 2026
+</div>
+
+<script>
+function showTab(id){
+document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+event.target.classList.add('active');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
