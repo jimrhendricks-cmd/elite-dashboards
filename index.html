@@ -1003,6 +1003,112 @@ function buildAnnual(){
 
   // ===== QUARTERLY PERFORMANCE (EXPANDABLE) =====
   var ptMonthlyGoal=225000;
+  // Monthly trainer data by location for drill-downs (Q4: Jan/Feb/Mar)
+  var monthlyTrainerData={
+    'Oct 25':{regions:[
+      {name:'SOUTHGLENN',revenue:92997,goal:90500,trainers:[
+        {name:'Lovato, Kaleb',revenue:24043,goal:20000},{name:'Zeien, Brendan',revenue:12630,goal:10000},
+        {name:'Edwards, Deonta',revenue:10485,goal:7500},{name:'Rodriguez, Camala',revenue:10280,goal:12500},
+        {name:'Greenwood, Dustin',revenue:8715,goal:9500},{name:'Watson, Andrew',revenue:6905,goal:7500},
+        {name:'Allen, Chris',revenue:5150,goal:2500},{name:'Wiater, Alec',revenue:5100,goal:7500},
+        {name:'Mayfield, Ethan',revenue:4790,goal:7500},{name:'Beserra, Robert',revenue:3155,goal:3500},
+        {name:'Sakach, Lexi',revenue:1744,goal:2500}
+      ]},
+      {name:'INVERNESS',revenue:37556,goal:51000,trainers:[
+        {name:'Priest, Erich',revenue:11360,goal:12500},{name:'Sargent, Wyatt',revenue:10650,goal:10500},
+        {name:'Murphy, Ryan',revenue:10521,goal:12500},{name:'Gonzales, Matt',revenue:2440,goal:8500},
+        {name:'Leeds, Rory',revenue:1725,goal:5000},{name:'Strong, Makenzi',revenue:860,goal:2000}
+      ]},
+      {name:'LOWRY + SKILLS',revenue:13699,goal:22500,trainers:[
+        {name:'Martinez, Lera',revenue:8004,goal:10000},{name:'Middleton, Derrick',revenue:5695,goal:12500}
+      ]}
+    ]},
+    'Nov 25':{regions:[
+      {name:'SOUTHGLENN',revenue:186461,goal:165000,trainers:[
+        {name:'Greenwood, Dustin',revenue:39600,goal:15000},{name:'Wiater, Alec',revenue:32825,goal:20000},
+        {name:'Lovato, Kaleb',revenue:28048,goal:20000},{name:'Edwards, Deonta',revenue:20370,goal:20000},
+        {name:'Zeien, Brendan',revenue:17440,goal:15000},{name:'Rodriguez, Camala',revenue:16330,goal:20000},
+        {name:'Watson, Andrew',revenue:12050,goal:10000},{name:'Mayfield, Ethan',revenue:9175,goal:15000},
+        {name:'Sakach, Lexi',revenue:6885,goal:10000},{name:'Allen, Chris',revenue:2430,goal:10000},
+        {name:'Beserra, Robert',revenue:2188,goal:10000},{name:'Audrey Brown',revenue:1036,goal:0}
+      ]},
+      {name:'INVERNESS',revenue:84198,goal:82000,trainers:[
+        {name:'Sargent, Wyatt',revenue:22985,goal:15000},{name:'Priest, Erich',revenue:18189,goal:20000},
+        {name:'Gonzales, Matt',revenue:17890,goal:15000},{name:'Murphy, Ryan',revenue:13859,goal:15000},
+        {name:'Leeds, Rory',revenue:6190,goal:12000},{name:'Strong, Makenzi',revenue:5085,goal:5000}
+      ]},
+      {name:'LOWRY + SKILLS',revenue:21589,goal:25000,trainers:[
+        {name:'Middleton, Derrick',revenue:13355,goal:15000},{name:'Martinez, Lera',revenue:8014,goal:10000},
+        {name:'Pugh, Jarvis',revenue:220,goal:0}
+      ]}
+    ]},
+    'Dec 25':{regions:[
+      {name:'SOUTHGLENN',revenue:100694,goal:102000,trainers:[
+        {name:'Lovato, Kaleb',revenue:23251,goal:16500},{name:'Mayfield, Ethan',revenue:12389,goal:8500},
+        {name:'Wiater, Alec',revenue:9626,goal:8500},{name:'Wardyn, Megan',revenue:8098,goal:0},
+        {name:'Allen, Chris',revenue:7618,goal:5000},{name:'Watson, Andrew',revenue:7375,goal:8500},
+        {name:'Zeien, Brendan',revenue:6390,goal:12000},{name:'Beserra, Robert',revenue:6340,goal:5000},
+        {name:'Perez, Maurice',revenue:5820,goal:0},{name:'Greenwood, Dustin',revenue:5540,goal:7500},
+        {name:'Rodriguez, Camala',revenue:3680,goal:12000},{name:'Sakach, Lexi',revenue:2767,goal:6000},
+        {name:'Audrey Brown',revenue:2516,goal:2500},{name:'Edwards, Deonta',revenue:1380,goal:10000}
+      ]},
+      {name:'INVERNESS',revenue:61521,goal:53000,trainers:[
+        {name:'Priest, Erich',revenue:12890,goal:14500},{name:'Gonzales, Matt',revenue:12657,goal:8500},
+        {name:'Murphy, Ryan',revenue:10994,goal:12000},{name:'Sargent, Wyatt',revenue:10020,goal:8500},
+        {name:'Strong, Makenzi',revenue:6660,goal:2000},{name:'Leeds, Rory',revenue:5760,goal:5000},
+        {name:'Bormuth, Stephanie',revenue:2540,goal:2500}
+      ]},
+      {name:'LOWRY + SKILLS',revenue:13178,goal:15000,trainers:[
+        {name:'Martinez, Lera',revenue:6182,goal:7000},{name:'Middleton, Derrick',revenue:6116,goal:6500},
+        {name:'Pugh, Jarvis',revenue:880,goal:1500}
+      ]}
+    ]},
+    'Jan 26':{regions:[
+      {name:'SOUTHGLENN',revenue:98082,goal:133000,trainers:[
+        {name:'Lovato, Kaleb',revenue:19720,goal:20000},{name:'Rodriguez, Camala',revenue:12320,goal:12000},
+        {name:'Zeien, Brendan',revenue:10175,goal:11000},{name:'Wardyn, Megan',revenue:10584,goal:8000},
+        {name:'Mayfield, Ethan',revenue:9620,goal:10000},{name:'Edwards, Deonta',revenue:7370,goal:10000},
+        {name:'Beserra, Robert',revenue:6900,goal:6500},{name:'Audrey Brown',revenue:5154,goal:6500},
+        {name:'Perez, Maurice',revenue:4885,goal:5000},{name:'Watson, Andrew',revenue:4218,goal:10000},
+        {name:'Greenwood, Dustin',revenue:2440,goal:7500},{name:'Sakach, Lexi',revenue:2362,goal:6500},
+        {name:'Allen, Chris',revenue:1840,goal:8500},{name:'Wiater, Alec',revenue:725,goal:10000}
+      ]},
+      {name:'INVERNESS',revenue:60661,goal:78000,trainers:[
+        {name:'Priest, Erich',revenue:20746,goal:16000},{name:'Murphy, Ryan',revenue:11985,goal:14000},
+        {name:'Sargent, Wyatt',revenue:10875,goal:12000},{name:'Bormuth, Stephanie',revenue:8030,goal:8000},
+        {name:'Gonzales, Matt',revenue:5825,goal:12000},{name:'Strong, Makenzi',revenue:1880,goal:7500},
+        {name:'Leeds, Rory',revenue:1320,goal:8500}
+      ]},
+      {name:'LOWRY + SKILLS',revenue:19159,goal:19000,trainers:[
+        {name:'Martinez, Lera',revenue:8422,goal:7500},{name:'Middleton, Derrick',revenue:7203,goal:8000},
+        {name:'Chase, Adin',revenue:2654,goal:2500},{name:'Pugh, Jarvis',revenue:880,goal:1000}
+      ]}
+    ]},
+    'Feb 26':{regions:[
+      {name:'SOUTHGLENN',revenue:104522,goal:133000,trainers:[
+        {name:'Lovato, Kaleb',revenue:18252,goal:20000},{name:'Wardyn, Megan',revenue:11923,goal:8000},
+        {name:'Rodriguez, Camala',revenue:11855,goal:12000},{name:'Mayfield, Ethan',revenue:11785,goal:10000},
+        {name:'Edwards, Deonta',revenue:10165,goal:10000},{name:'Wiater, Alec',revenue:8750,goal:10000},
+        {name:'Watson, Andrew',revenue:8350,goal:10000},{name:'Zeien, Brendan',revenue:7705,goal:11000},
+        {name:'Beserra, Robert',revenue:5430,goal:6500},{name:'Greenwood, Dustin',revenue:4424,goal:7500},
+        {name:'Audrey Brown',revenue:1720,goal:6500},{name:'Perez, Maurice',revenue:1730,goal:5000},
+        {name:'Allen, Chris',revenue:1600,goal:8500},{name:'Sakach, Lexi',revenue:397,goal:6500}
+      ]},
+      {name:'INVERNESS',revenue:60422,goal:85000,trainers:[
+        {name:'Priest, Erich',revenue:16535,goal:15500},{name:'Bormuth, Stephanie',revenue:16030,goal:10500},
+        {name:'Murphy, Ryan',revenue:10745,goal:15500},{name:'Leeds, Rory',revenue:8070,goal:10500},
+        {name:'Sargent, Wyatt',revenue:5402,goal:13000},{name:'Gonzales, Matt',revenue:1960,goal:13000},
+        {name:'Strong, Makenzi',revenue:1680,goal:7000}
+      ]},
+      {name:'LOWRY + SKILLS',revenue:22785,goal:20000,trainers:[
+        {name:'Middleton, Derrick',revenue:11707,goal:8000},{name:'Martinez, Lera',revenue:6508,goal:7500},
+        {name:'Chase, Adin',revenue:3600,goal:3500},{name:'Pugh, Jarvis',revenue:970,goal:1000}
+      ]}
+    ]}
+  };
+  // March uses D.regions (already loaded from main data)
+  monthlyTrainerData['Mar 26']={regions:D.regions.map(function(r){return {name:r.name,revenue:r.revenue,goal:r.goal,trainers:r.trainers};})};
+
   h+='<div class="card" style="margin-bottom:14px;"><div class="card-hd"><span class="card-title">Quarterly Performance to Plan</span><span style="font-size:9px;color:var(--text3);margin-left:8px;">Click to drill down</span></div>';
   h+='<div style="padding:14px;">';
   var quarters=[{name:'Q1',sub:'Apr — Jun',data:q1,color:'var(--green)'},{name:'Q2',sub:'Jul — Sep',data:q2,color:'var(--blue)'},{name:'Q3',sub:'Oct — Dec',data:q3,color:'var(--purple)'},{name:'Q4',sub:'Jan — Mar',data:q4,color:'var(--gold)'}];
@@ -1052,18 +1158,18 @@ function buildAnnual(){
       var varC=mPTVar>=0?'var(--green)':'var(--red)';
       var dP=mon.duesG?((mon.dues/mon.duesG)*100).toFixed(1):'—';
       var dPC=parseFloat(dP)>=100?'var(--green)':'var(--red)';
-      var isMarch=(mon.m==='Mar 26');
+      var hasTrainerData=!!monthlyTrainerData[mon.m];
       var monthId='qm-'+qi+'-'+mi;
 
-      // Month row — clickable if March (has trainer data)
-      if(isMarch){
+      // Month row — clickable if trainer data exists for this month
+      if(hasTrainerData){
         h+='<div class="loc-expand" id="'+monthId+'" onclick="event.stopPropagation();this.classList.toggle(\'open\')" style="margin-bottom:4px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 8px 0;cursor:pointer;">';
         h+='<div class="expand-icon" style="top:8px;right:8px;width:18px;height:18px;font-size:8px;">▼</div>';
       } else {
         h+='<div style="margin-bottom:4px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px;">';
       }
-      h+='<div style="display:grid;grid-template-columns:80px 1fr 80px 80px 60px 60px 60px;gap:4px;align-items:center;'+(isMarch?'padding-right:24px;':'')+'">';
-      h+='<div style="font-size:11px;font-weight:700;color:'+(isMarch?'var(--gold)':'var(--text)')+';white-space:nowrap;">'+mon.m+'</div>';
+      h+='<div style="display:grid;grid-template-columns:80px 1fr 80px 80px 60px 60px 60px;gap:4px;align-items:center;'+(hasTrainerData?'padding-right:24px;':'')+'">';
+      h+='<div style="font-size:11px;font-weight:700;color:'+(hasTrainerData?'var(--gold)':'var(--text)')+';white-space:nowrap;">'+mon.m+'</div>';
       // Progress bar
       h+='<div style="height:4px;background:var(--surface3);border-radius:2px;overflow:hidden;"><div style="height:100%;width:'+Math.min(parseFloat(mPTpct),100)+'%;background:'+varC+';border-radius:2px;"></div></div>';
       h+='<div class="mono" style="text-align:right;font-size:10px;color:var(--text3);">$'+Math.round(ptMonthlyGoal/1000)+'K</div>';
@@ -1073,14 +1179,16 @@ function buildAnnual(){
       h+='<div class="mono" style="text-align:right;font-size:10px;font-weight:600;">'+mon.mem+'</div>';
       h+='</div>';
 
-      // If March, add expandable trainer drill-down by location
-      if(isMarch){
+      // Add expandable trainer drill-down by location for any month with data
+      if(hasTrainerData){
+        var mData=monthlyTrainerData[mon.m];
+        var mLabel=mon.m.replace(' 2','20').replace(' ','');
         h+='<div class="loc-detail">';
         h+='<div style="border-top:1px solid var(--border);padding:8px 0 4px;margin-top:6px;">';
-        h+='<div style="font-size:8px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;">March 2026 — By Location & Trainer</div>';
+        h+='<div style="font-size:8px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;">'+mon.m+' — By Location & Trainer</div>';
 
         // Each location with trainers
-        D.regions.forEach(function(reg){
+        mData.regions.forEach(function(reg){
           var regPct=reg.goal>0?((reg.revenue/reg.goal)*100).toFixed(1):'—';
           var regC=parseFloat(regPct)>=100?'var(--green)':'var(--red)';
           h+='<div style="margin-bottom:8px;">';
@@ -1091,10 +1199,9 @@ function buildAnnual(){
           // Trainer rows
           var trSorted=reg.trainers.slice().sort(function(a,b){return b.revenue-a.revenue;});
           trSorted.forEach(function(tr,ti){
-            if(tr.revenue===0) return; // skip zero-rev trainers for cleaner view
+            if(tr.revenue===0) return;
             var tPct=tr.goal>0?((tr.revenue/tr.goal)*100).toFixed(1):'—';
             var tC=parseFloat(tPct)>=100?'var(--green)':parseFloat(tPct)>=80?'var(--gold)':'var(--red)';
-            var tVar=tr.revenue-tr.goal;
             h+='<div style="display:grid;grid-template-columns:1fr 70px 70px 50px;gap:4px;padding:3px 0 3px 12px;border-bottom:1px solid var(--border);font-size:9px;align-items:center;">';
             h+='<div style="font-weight:500;color:var(--text2);">'+tr.name+'</div>';
             h+='<div class="mono" style="text-align:right;font-weight:600;color:var(--gold);">$'+tr.revenue.toLocaleString()+'</div>';
