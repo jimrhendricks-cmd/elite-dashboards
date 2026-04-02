@@ -427,7 +427,7 @@ function buildSB(){
   h+='</div>';
   h+='<div id="rbody-co" style="display:none;padding:10px 14px;">';
   h+='<div class="tw"><table class="t"><thead><tr><th>Source</th><th class="r">Amount</th><th>Details</th></tr></thead><tbody>';
-  D.companyTxns.forEach(function(tx){h+='<tr class="tr"><td class="nm">'+tx.c+'</td><td class="r rv2 c-gold">'+fmtD(tx.a)+'</td><td style="color:var(--text3);">'+tx.t+'</td></tr>';});
+  (D.companyItems||[]).forEach(function(tx){h+='<tr class="tr"><td class="nm">'+tx.name+'</td><td class="r rv2 c-gold">'+fmtD(tx.revenue)+'</td><td style="color:var(--text3);">Goal: '+fmtD(tx.goal)+'</td></tr>';});
   h+='</tbody></table></div>';
   h+='<div class="feeder" style="margin:10px 0;"><div style="font-size:9px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Feeder System</div><div class="ff">';
   h+='<div class="fn"><div class="fv c-blue">2,612</div><div class="fl">Members</div></div><div style="color:var(--text3);font-size:16px;flex-shrink:0;">→</div>';
